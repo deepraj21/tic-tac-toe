@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body{
+            background: url("/pexels-josh-sorenson-391522.jpg");
+        }
+        .board {
+            display: flex;
+            flex-wrap: wrap;
+            width: 300px;
+            height: 300px;
+            border: 3px solid black;
+            margin: auto;
+        }
+
+        h1{
+            font-size: 2cm;
+            text-align: center;
+        }
+
+        .square {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            box-sizing: border-box;
+            border: 3px solid black;
+        }
+        a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>TIC-TAC-TOE</h1>
+    <div id="game">
+        <div class="board">
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+            <div class="square"></div>
+        </div>
+    </div>
+    <a href="/tictactoe.html"><h1>RESET</h1></a>
+    <script>
+        const squares = document.querySelectorAll('.square');
+        let xIsNext = true;
+
+        const lines = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6],
+        ];
+
+        for (const square of squares) {
+            square.addEventListener('click', function () {
+                if (square.textContent === '') {
+                    if (xIsNext) {
+                        square.textContent = 'X';
+                    } else {
+                        square.textContent = 'O';
+                    }
+                    xIsNext = !xIsNext;
+
+                    for (const line of lines) {
+                        const [a, b, c] = line;
+                        if (
+                            squares[a].textContent === squares[b].textContent &&
+                            squares[b].textContent === squares[c].textContent &&
+                            squares[a].textContent !== ''
+                        ) {
+                            alert(squares[a].textContent + ' won!');
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
